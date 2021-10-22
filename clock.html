@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>CodePen - Animated Clock Ticker</title>
+
+  <link rel="stylesheet" media="screen" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-1580f96ce81ff0a427cf57dda2748ce646c38efc201ae5942a29958cffa6856d.css" />
+  
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+
+
+  <title>CodePen - Animated Clock Ticker</title>
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+  <style>
+    html { font-size: 15px; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { height:100%; display: flex; flex-direction: column; }
+    .referer-warning {
+      background: black;
+      box-shadow: 0 2px 5px rgba(0,0,0, 0.5);
+      padding: 0.75em;
+      color: white;
+      text-align: center;
+      font-family: var(--cp-font-family);
+      line-height: 1.2;
+      font-size: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .referer-warning h1 { font-size: 1.2rem; margin: 0; }
+    .referer-warning a { color: #56bcf9; } /* $linkColorOnBlack */
+  </style>
+</head>
+
+<body class="">
+  <div class="referer-warning">
+    <h1>⚠️ Do not enter passwords or personal information on this page. ⚠️</h1>
+      This is a code demo posted by a web developer on <a href="https://codepen.io">codepen.io</a>.
+    <br />
+    A referer from CodePen is required to render this page view, and your browser is not sending one (<a href="https://blog.codepen.io/2017/10/05/regarding-referer-headers/" target="_blank">more details</a>).</h1>
+  </div>
+
+  <div id="result-iframe-wrap" role="main">
+
+    <iframe
+      id="result"
+      srcdoc="
+<!DOCTYPE html>
+<html lang=&quot;en&quot; >
+
+<head>
+
+  <meta charset=&quot;UTF-8&quot;>
+  
+<link rel=&quot;apple-touch-icon&quot; type=&quot;image/png&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png&quot; />
+<meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;CodePen&quot;>
+
+<link rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico&quot; />
+
+<link rel=&quot;mask-icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg&quot; color=&quot;#111&quot; />
+
+
+  <title>CodePen - Animated Clock Ticker</title>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+  <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css&quot;>
+
+  
+  
+<style>
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #151515;
+  /* Adjust font size to to change clock size */
+  font: 300%/1.5em &quot;Droid Sans Mono&quot;, monospace;
+  text-align: center;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.clock {
+  background: #000;
+  border: 1px solid #000;
+  box-shadow: 0 0 0 1px #333;
+  display: inline-block;
+  margin: 100px 0 0 0;
+  height: 1.5em;
+  /* Remove the line below to see behind the curtain */
+  overflow: hidden;
+}
+
+.clock .col {
+  background: linear-gradient(#222222 0%, #383838 50%, #222222 100%);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  float: left;
+  height: 100%;
+  margin: 0 1px 0 0;
+  position: relative;
+}
+
+.clock .col:last-child {
+  margin: 0;
+}
+
+.clock .col:before {
+  content: &quot;&quot;;
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.clock span {
+  color: #fff;
+  display: block;
+  width: 1em;
+  word-break: break-all;
+  word-break: break-word;
+}
+
+.clock .d,
+.clock .per {
+  position: relative;
+  top: 0;
+  transition: top 500ms ease-out;
+}
+
+.clock .d:before {
+  content: &quot; 0 1 2 3 4 5 6 7 8 9 &quot;;
+}
+
+.clock .d1 {
+  top: -1.5em;
+}
+
+.clock .d2 {
+  top: -3em;
+}
+
+.clock .d3 {
+  top: -4.5em;
+}
+
+.clock .d4 {
+  top: -6em;
+}
+
+.clock .d5 {
+  top: -7.5em;
+}
+
+.clock .d6 {
+  top: -9em;
+}
+
+.clock .d7 {
+  top: -10.5em;
+}
+
+.clock .d8 {
+  top: -12em;
+}
+
+.clock .d9 {
+  top: -13.5em;
+}
+
+.clock .c,
+.clock .per {
+  color: #777;
+  font-size: 0.5em;
+}
+
+.clock .c {
+  width: 0.7em;
+}
+
+.clock .per {
+  width: 2em;
+}
+
+.clock .per:before {
+  content: &quot; AM PM &quot;;
+}
+
+.clock .per.pm {
+  top: -3em;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js&quot;></script>
+
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage(&quot;resize&quot;, &quot;*&quot;);
+  }
+</script>
+
+
+</head>
+
+<body translate=&quot;no&quot; >
+  <div class='clock'>
+  <div class='col'>
+    <span class='d h h1'></span>
+  </div>
+  <div class='col'>
+    <span class='d h h2'></span>
+  </div>
+  <div class='col'>
+    <span class='c'>:</span>
+  </div>
+  <div class='col'>
+    <span class='d m m1'></span>
+  </div>
+  <div class='col'>
+    <span class='d m m2'></span>
+  </div>
+  <div class='col'>
+    <span class='c'>:</span>
+  </div>
+  <div class='col'>
+    <span class='d s s1'></span>
+  </div>
+  <div class='col'>
+    <span class='d s s2'></span>
+  </div>
+  <div class='col'>
+    <span class='per'></span>
+  </div>
+</div>
+    <script src=&quot;https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js&quot;></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script id=&quot;rendered-js&quot; >
+(function() {
+  var digits, hour1, hour2, minute1, minute2, period, second1, second2, updateClock;
+
+  digits = $('.d');
+
+  hour1 = $('.h1');
+
+  hour2 = $('.h2');
+
+  minute1 = $('.m1');
+
+  minute2 = $('.m2');
+
+  second1 = $('.s1');
+
+  second2 = $('.s2');
+
+  period = $('.per');
+
+  updateClock = function() {
+    var d, h, m, p, s;
+    d = new Date();
+    h = d.getHours();
+    m = d.getMinutes();
+    s = d.getSeconds();
+    if (h >= 12) {
+      p = 'pm';
+    } else {
+      p = 'am';
+    }
+    if (h >= 13) {
+      h = '' + h - 12;
+    } else {
+      h = '' + h;
+    }
+    if (h < 10) {
+      h = '0' + h;
+    } else {
+      h = '' + h;
+    }
+    if (h === '00') {
+      h = '12';
+    }
+    if (m < 10) {
+      m = '0' + m;
+    } else {
+      m = '' + m;
+    }
+    if (s < 10) {
+      s = '0' + s;
+    } else {
+      s = '' + s;
+    }
+    digits.removeClass('d0 d1 d2 d3 d4 d5 d6 d7 d8 d9');
+    hour1.addClass('d' + h.charAt(0));
+    hour2.addClass('d' + h.charAt(1));
+    minute1.addClass('d' + m.charAt(0));
+    minute2.addClass('d' + m.charAt(1));
+    second1.addClass('d' + s.charAt(0));
+    second2.addClass('d' + s.charAt(1));
+    period.removeClass('am pm');
+    return period.addClass(p);
+  };
+
+  updateClock();
+
+  setInterval(updateClock, 250);
+
+}).call(this);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiPGFub255bW91cz4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQSxNQUFBLE1BQUEsRUFBQSxLQUFBLEVBQUEsS0FBQSxFQUFBLE9BQUEsRUFBQSxPQUFBLEVBQUEsTUFBQSxFQUFBLE9BQUEsRUFBQSxPQUFBLEVBQUE7O0VBQUEsTUFBQSxHQUFTLENBQUEsQ0FBRSxJQUFGOztFQUNULEtBQUEsR0FBUSxDQUFBLENBQUUsS0FBRjs7RUFDUixLQUFBLEdBQVEsQ0FBQSxDQUFFLEtBQUY7O0VBQ1IsT0FBQSxHQUFVLENBQUEsQ0FBRSxLQUFGOztFQUNWLE9BQUEsR0FBVSxDQUFBLENBQUUsS0FBRjs7RUFDVixPQUFBLEdBQVUsQ0FBQSxDQUFFLEtBQUY7O0VBQ1YsT0FBQSxHQUFVLENBQUEsQ0FBRSxLQUFGOztFQUNWLE1BQUEsR0FBUyxDQUFBLENBQUUsTUFBRjs7RUFDVCxXQUFBLEdBQWMsUUFBQSxDQUFBLENBQUE7QUFDZCxRQUFBLENBQUEsRUFBQSxDQUFBLEVBQUEsQ0FBQSxFQUFBLENBQUEsRUFBQTtJQUFFLENBQUEsR0FBSSxJQUFJLElBQUosQ0FBQTtJQUNKLENBQUEsR0FBSSxDQUFDLENBQUMsUUFBRixDQUFBO0lBQ0osQ0FBQSxHQUFJLENBQUMsQ0FBQyxVQUFGLENBQUE7SUFDSixDQUFBLEdBQUksQ0FBQyxDQUFDLFVBQUYsQ0FBQTtJQUNKLElBQUcsQ0FBQSxJQUFLLEVBQVI7TUFBZ0IsQ0FBQSxHQUFJLEtBQXBCO0tBQUEsTUFBQTtNQUE4QixDQUFBLEdBQUksS0FBbEM7O0lBQ0EsSUFBRyxDQUFBLElBQUssRUFBUjtNQUFnQixDQUFBLEdBQUksRUFBQSxHQUFLLENBQUwsR0FBUyxHQUE3QjtLQUFBLE1BQUE7TUFBcUMsQ0FBQSxHQUFJLEVBQUEsR0FBSyxFQUE5Qzs7SUFDQSxJQUFHLENBQUEsR0FBSSxFQUFQO01BQWUsQ0FBQSxHQUFJLEdBQUEsR0FBTSxFQUF6QjtLQUFBLE1BQUE7TUFBZ0MsQ0FBQSxHQUFJLEVBQUEsR0FBSyxFQUF6Qzs7SUFDQSxJQUFHLENBQUEsS0FBSyxJQUFSO01BQWtCLENBQUEsR0FBSSxLQUF0Qjs7SUFDQSxJQUFHLENBQUEsR0FBSSxFQUFQO01BQWUsQ0FBQSxHQUFJLEdBQUEsR0FBTSxFQUF6QjtLQUFBLE1BQUE7TUFBZ0MsQ0FBQSxHQUFJLEVBQUEsR0FBSyxFQUF6Qzs7SUFDQSxJQUFHLENBQUEsR0FBSSxFQUFQO01BQWUsQ0FBQSxHQUFJLEdBQUEsR0FBTSxFQUF6QjtLQUFBLE1BQUE7TUFBZ0MsQ0FBQSxHQUFJLEVBQUEsR0FBSyxFQUF6Qzs7SUFDQSxNQUFNLENBQUMsV0FBUCxDQUFtQiwrQkFBbkI7SUFDQSxLQUFLLENBQUMsUUFBTixDQUFlLEdBQUEsR0FBTSxDQUFDLENBQUMsTUFBRixDQUFTLENBQVQsQ0FBckI7SUFDQSxLQUFLLENBQUMsUUFBTixDQUFlLEdBQUEsR0FBTSxDQUFDLENBQUMsTUFBRixDQUFTLENBQVQsQ0FBckI7SUFDQSxPQUFPLENBQUMsUUFBUixDQUFpQixHQUFBLEdBQU0sQ0FBQyxDQUFDLE1BQUYsQ0FBUyxDQUFULENBQXZCO0lBQ0EsT0FBTyxDQUFDLFFBQVIsQ0FBaUIsR0FBQSxHQUFNLENBQUMsQ0FBQyxNQUFGLENBQVMsQ0FBVCxDQUF2QjtJQUNBLE9BQU8sQ0FBQyxRQUFSLENBQWlCLEdBQUEsR0FBTSxDQUFDLENBQUMsTUFBRixDQUFTLENBQVQsQ0FBdkI7SUFDQSxPQUFPLENBQUMsUUFBUixDQUFpQixHQUFBLEdBQU0sQ0FBQyxDQUFDLE1BQUYsQ0FBUyxDQUFULENBQXZCO0lBQ0EsTUFBTSxDQUFDLFdBQVAsQ0FBbUIsT0FBbkI7V0FDQSxNQUFNLENBQUMsUUFBUCxDQUFnQixDQUFoQjtFQW5CWTs7RUFvQmQsV0FBQSxDQUFBOztFQUNBLFdBQUEsQ0FBWSxXQUFaLEVBQXlCLEdBQXpCO0FBN0JBIiwic291cmNlc0NvbnRlbnQiOlsiZGlnaXRzID0gJCAnLmQnXG5ob3VyMSA9ICQgJy5oMSdcbmhvdXIyID0gJCAnLmgyJ1xubWludXRlMSA9ICQgJy5tMSdcbm1pbnV0ZTIgPSAkICcubTInXG5zZWNvbmQxID0gJCAnLnMxJ1xuc2Vjb25kMiA9ICQgJy5zMidcbnBlcmlvZCA9ICQgJy5wZXInXG51cGRhdGVDbG9jayA9IC0+XHRcbiAgZCA9IG5ldyBEYXRlKClcbiAgaCA9IGQuZ2V0SG91cnMoKVxuICBtID0gZC5nZXRNaW51dGVzKClcbiAgcyA9IGQuZ2V0U2Vjb25kcygpXG4gIGlmIGggPj0gMTIgdGhlbiBwID0gJ3BtJyBlbHNlIHAgPSAnYW0nXG4gIGlmIGggPj0gMTMgdGhlbiBoID0gJycgKyBoIC0gMTIgZWxzZSBoID0gJycgKyBoXG4gIGlmIGggPCAxMCB0aGVuIGggPSAnMCcgKyBoIGVsc2UgaCA9ICcnICsgaFxuICBpZiBoID09ICcwMCcgdGhlbiBoID0gJzEyJ1xuICBpZiBtIDwgMTAgdGhlbiBtID0gJzAnICsgbSBlbHNlIG0gPSAnJyArIG1cbiAgaWYgcyA8IDEwIHRoZW4gcyA9ICcwJyArIHMgZWxzZSBzID0gJycgKyBzIFx0XHRcbiAgZGlnaXRzLnJlbW92ZUNsYXNzICdkMCBkMSBkMiBkMyBkNCBkNSBkNiBkNyBkOCBkOSdcbiAgaG91cjEuYWRkQ2xhc3MgJ2QnICsgaC5jaGFyQXQgMFxuICBob3VyMi5hZGRDbGFzcyAnZCcgKyBoLmNoYXJBdCAxXG4gIG1pbnV0ZTEuYWRkQ2xhc3MgJ2QnICsgbS5jaGFyQXQgMFxuICBtaW51dGUyLmFkZENsYXNzICdkJyArIG0uY2hhckF0IDFcbiAgc2Vjb25kMS5hZGRDbGFzcyAnZCcgKyBzLmNoYXJBdCAwXG4gIHNlY29uZDIuYWRkQ2xhc3MgJ2QnICsgcy5jaGFyQXQgMVxuICBwZXJpb2QucmVtb3ZlQ2xhc3MgJ2FtIHBtJ1xuICBwZXJpb2QuYWRkQ2xhc3MgcFxudXBkYXRlQ2xvY2soKVxuc2V0SW50ZXJ2YWwgdXBkYXRlQ2xvY2ssIDI1MCJdfQ==
+//# sourceURL=coffeescript
+//# sourceURL=pen.js
+    </script>
+
+  
+
+</body>
+
+</html>
+ 
+"
+      sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation  allow-scripts allow-top-navigation-by-user-activation" allow="accelerometer; camera; encrypted-media; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowTransparency="true"
+      allowpaymentrequest="true" allowfullscreen="true" class="result-iframe">
+      </iframe>
+
+  </div>
+</body>
+</html>
